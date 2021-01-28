@@ -24,9 +24,8 @@ export default {
     methods: {
         signin(user) {
             this.$store.dispatch('login', user).then(() => {
-                this.$router.push('/')
+                
             })
-            
         }
     }
 }

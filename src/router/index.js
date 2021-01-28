@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/home',
     name: 'Home',
     component: Home,
     meta: {
@@ -37,7 +37,7 @@ router.beforeEach((to, from, next) => {
     return next()
   }else if (status == 'AUTHENTICATED') {
     return next()
-  } else {
+  } else if(to.name == 'Login') {
     next('/login')
   }
 

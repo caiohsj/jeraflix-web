@@ -4,7 +4,7 @@
         <p>flix</p>
         <ul>
           <li v-if="auth == 'AUTHENTICATED'">
-            <router-link to="/">Home</router-link>
+            <router-link to="/home">Home</router-link>
           </li>
           <li v-if="auth == 'AUTHENTICATED'">
             <a v-on:click.prevent="logout" to="/">Logout</a>

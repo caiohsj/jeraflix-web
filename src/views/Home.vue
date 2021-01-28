@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <DialogForUserWithoutProfile v-bind:profiles="profiles"/>
     <h1>Popular Movies</h1>
     <ListMovies v-bind:movies="moviesPopular"/>
     <h1>Top Rated Movies</h1>
@@ -16,9 +17,11 @@ h1 {
 </style>
 
 <script>
-// @ is an alias to /src
 import ListMovies from '@/components/ListMovies.vue'
+import DialogForUserWithoutProfile from '@/components/DialogForUserWithoutProfile'
+
 import movieService from '../services/themoviedb/movie/movie'
+import profileService from '../services/jeraflix_api/profile/profile'
 
 export default {
   name: 'Home',
@@ -27,11 +30,13 @@ export default {
       moviesPopular: [],
       moviesTopRated: [],
       moviesUpcoming: [],
-      moviesNowPlaying: []
+      moviesNowPlaying: [],
+      profiles: []
     }
   },
   components: {
-    ListMovies
+    ListMovies,
+    DialogForUserWithoutProfile
   },
   methods: {
     loadMoviesPopular() {
@@ -48,12 +53,21 @@ export default {
       movieService.getUpComing().then((response) => {
         this.moviesUpcoming = response.data.results
       })
+    },
+    loadProfiles() {
+      profileService.getList({
+        email: this.$store.getters.authUser.email,
+        token: this.$store.getters.authUser.token
+      }).then((response) => {
+        this.profiles = response.data
+      })
     }
   },
   mounted() {
     this.loadMoviesPopular(),
     this.loadMoviesTopRated(),
-    this.loadMoviesUpComing()
+    this.loadMoviesUpComing(),
+    this.loadProfiles()
   }
 }
 </script>

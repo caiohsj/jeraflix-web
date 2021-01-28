@@ -13,7 +13,7 @@ new Vue({
     if(authUser){
         this.$store.commit('setUser', authUser);
         this.$store.commit('setStatus', 'AUTHENTICATED');
-        this.$router.push("/")
+        this.$router.push("/home")
     }
   },
   render: h => h(App)
