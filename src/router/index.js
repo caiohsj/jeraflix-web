@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import ProfileCreate from '../views/ProfileCreate.vue'
+import Profile from '../views/Profile.vue';
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -28,6 +29,14 @@ const routes = [
     path: '/profile',
     name: 'ProfileCreate',
     component: ProfileCreate,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/profile/:id',
+    name: 'Profile',
+    component: Profile,
     meta: {
       authRequired: true
     }

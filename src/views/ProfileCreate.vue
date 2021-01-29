@@ -30,7 +30,7 @@ import ProfileCreateForm from '../components/ProfileCreateForm.vue'
 import AlertMessageDanger from '../components/AlertMessageDanger.vue'
 import AlertMessageSuccess from '../components/AlertMessageSuccess.vue'
 
-import profileService from '../services/jeraflix_api/profile/profile.js'
+import profileService from '../services/jeraflix_api/profile'
 
 export default {
     name: 'ProfileCreate',

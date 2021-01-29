@@ -1,4 +1,4 @@
-import userService from '@/services/jeraflix_api/user/user.js'
+import userService from '@/services/jeraflix_api/user'
 
 export default {
     login(context, payload) {

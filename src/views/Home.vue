@@ -20,8 +20,8 @@ h1 {
 import ListMovies from '@/components/ListMovies.vue'
 import ListProfiles from '@/components/ListProfiles'
 
-import movieService from '../services/themoviedb/movie/movie'
-import profileService from '../services/jeraflix_api/profile/profile'
+import movieService from '../services/themoviedb/movie'
+import profileService from '../services/jeraflix_api/profile'
 
 export default {
   name: 'Home',

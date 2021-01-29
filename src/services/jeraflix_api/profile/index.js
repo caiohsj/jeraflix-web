@@ -6,5 +6,8 @@ export default {
     },
     create(profile) {
         return http.post('/profiles', profile, { headers: headers})
+    },
+    get(id) {
+        return http.get('/profiles/'+id, { headers: headers})
     }
 }
