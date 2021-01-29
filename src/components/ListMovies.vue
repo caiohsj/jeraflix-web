@@ -49,7 +49,6 @@ body {
 
 article {
     border: 1px solid #0DB551;
-    max-width: 240px;
     height: 500px;
     box-shadow: 0px 0px 9px 1px #0DB551;
     margin-bottom: 25px;
