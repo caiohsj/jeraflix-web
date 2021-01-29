@@ -3,7 +3,7 @@
         <div class="movies">
 
             <article v-for="movie in movies" v-bind:key="movie.id">
-                <router-link to="/">
+                <router-link :to="{ name: 'movie', params: { id: movie.id } }">
                     <img v-bind:src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" alt="">
                 </router-link>
                <header>

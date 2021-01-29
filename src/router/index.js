@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import ProfileCreate from '../views/ProfileCreate.vue'
 import Profile from '../views/Profile.vue';
+import Movie from '../views/Movie'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -11,7 +12,7 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/home',
-    name: 'Home',
+    name: 'home',
     component: Home,
     meta: {
       authRequired: true
@@ -19,7 +20,7 @@ const routes = [
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: Login,
     meta: {
       authRequired: false
@@ -27,7 +28,7 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'ProfileCreate',
+    name: 'profile.create',
     component: ProfileCreate,
     meta: {
       authRequired: true
@@ -35,8 +36,16 @@ const routes = [
   },
   {
     path: '/profile/:id',
-    name: 'Profile',
+    name: 'profile',
     component: Profile,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/movie/:id',
+    name: 'movie',
+    component: Movie,
     meta: {
       authRequired: true
     }

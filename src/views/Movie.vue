@@ -10,6 +10,6 @@
 
 <script>
 export default {
-    name: 'MovieDetails'
+    name: 'Movie'
 }
 </script>
