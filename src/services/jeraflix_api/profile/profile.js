@@ -1,11 +1,10 @@
-import {http} from '../config'
+import {http, headers} from '../config'
 
 export default {
-    getList(user) {
-        const headers = {
-            'X-User-Email': user.email,
-            'X-User-Token': user.token
-        }
+    getList() {
         return http.get('/profiles', { headers: headers })
+    },
+    create(profile) {
+        return http.post('/profiles', profile, { headers: headers})
     }
 }

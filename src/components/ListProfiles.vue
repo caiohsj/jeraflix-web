@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="content">
         <div v-if="profiles.length == 0" class="dialog">
             <h2 class="alert">You need create profile! click here</h2>
         </div>
@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="box-btn">
-            <router-link class="btn-new-profile" to="" v-if="profiles.length < 4"> New profile</router-link>
+            <router-link class="btn-new-profile" to="/profile" v-if="profiles.length < 4"> New profile</router-link>
         </div>
     </div>
 </template>
@@ -22,6 +22,10 @@
     background: #fab1a0;
     padding: 20px;
     text-align: center;
+}
+
+.content {
+    margin-bottom: 60px;
 }
 
 .profiles {
