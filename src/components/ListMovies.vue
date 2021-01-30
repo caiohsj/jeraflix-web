@@ -1,5 +1,5 @@
 <template>
-    <div class="list">
+    <div class="list" v-if="movies.length > 0">
         <div class="movies">
 
             <article v-for="movie in movies" v-bind:key="movie.id">

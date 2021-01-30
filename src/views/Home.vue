@@ -3,7 +3,7 @@
     <ListProfiles v-if="!profile" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
     <div v-else>
       <div v-if="!showLoading">
-        <h1>Watch Later</h1>
+        <h1 v-if="moviesWatchlist.length > 0">Watch Later</h1>
         <ListMovies v-bind:movies="moviesWatchlist"/>
       </div>
       <div class="loading" v-else>
@@ -82,10 +82,8 @@ export default {
     loadWatchlist() {
       if (this.profile) {
         profileService.getWatchlist(this.profile.id).then(response => {
-          if(response.data.movies.length > 0) {
             this.moviesWatchlist = response.data.movies
             this.showLoading = false
-          }
         })
       }
     },
