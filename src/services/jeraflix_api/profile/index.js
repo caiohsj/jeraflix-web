@@ -9,5 +9,8 @@ export default {
     },
     get(id) {
         return http.get('/profiles/'+id, { headers: headers})
+    },
+    getWatchlist(id) {
+        return http.get(`/profiles/${id}/watchlist`, { headers: headers })
     }
 }

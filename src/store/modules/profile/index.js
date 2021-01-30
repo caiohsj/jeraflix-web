@@ -5,7 +5,7 @@ import mutations from './mutations.js'
 export default {
     state() {
         return {
-            profile: {}
+            profile: null
         }
     },
     mutations,

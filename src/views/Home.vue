@@ -1,8 +1,9 @@
 <template>
   <div class="home">
-    <ListProfiles v-if="!profile" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
+    <ListProfiles v-if="!profile || empty" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
     <div v-else>
-      
+      <h1>Watch Later</h1>
+      <ListMovies v-bind:movies="moviesWatchlist"/>
     </div>
     <h1>Popular Movies</h1>
     <ListMovies v-bind:movies="moviesPopular"/>
@@ -34,8 +35,9 @@ export default {
       moviesTopRated: [],
       moviesUpcoming: [],
       moviesNowPlaying: [],
+      moviesWatchlist: [],
       profiles: [],
-      profile: null
+      profile: this.$store.getters.profile
     }
   },
   components: {
@@ -66,9 +68,17 @@ export default {
         this.profiles = response.data
       })
     },
+    loadWatchlist() {
+      if (this.profile) {
+        profileService.getWatchlist(this.profile.id).then(response => {
+          this.moviesWatchlist = response.data.movies
+        })
+      }
+    },
     setProfile(profile) {
       this.$store.dispatch('addProfile', profile).then(() => {
         this.profile = profile
+        this.loadWatchlist()
       })
     }
   },
@@ -76,7 +86,8 @@ export default {
     this.loadMoviesPopular(),
     this.loadMoviesTopRated(),
     this.loadMoviesUpComing(),
-    this.loadProfiles()
+    this.loadProfiles(),
+    this.loadWatchlist()
   }
 }
 </script>
