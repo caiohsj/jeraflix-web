@@ -1,9 +1,14 @@
 <template>
   <div class="home">
-    <ListProfiles v-if="!profile || empty" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
+    <ListProfiles v-if="!profile" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
     <div v-else>
-      <h1>Watch Later</h1>
-      <ListMovies v-bind:movies="moviesWatchlist"/>
+      <div v-if="!showLoading">
+        <h1>Watch Later</h1>
+        <ListMovies v-bind:movies="moviesWatchlist"/>
+      </div>
+      <div class="loading" v-else>
+        <img src="../assets/loading.gif" />
+      </div>
     </div>
     <h1>Popular Movies</h1>
     <ListMovies v-bind:movies="moviesPopular"/>
@@ -17,6 +22,11 @@
 <style scoped>
 h1 {
     text-align: center;
+}
+
+.loading {
+  display: block;
+  text-align: center;
 }
 </style>
 
@@ -37,7 +47,8 @@ export default {
       moviesNowPlaying: [],
       moviesWatchlist: [],
       profiles: [],
-      profile: this.$store.getters.profile
+      profile: this.$store.getters.profile,
+      showLoading: true
     }
   },
   components: {
@@ -71,7 +82,10 @@ export default {
     loadWatchlist() {
       if (this.profile) {
         profileService.getWatchlist(this.profile.id).then(response => {
-          this.moviesWatchlist = response.data.movies
+          if(response.data.movies.length > 0) {
+            this.moviesWatchlist = response.data.movies
+            this.showLoading = false
+          }
         })
       }
     },
@@ -80,7 +94,7 @@ export default {
         this.profile = profile
         this.loadWatchlist()
       })
-    }
+    },
   },
   mounted() {
     this.loadMoviesPopular(),

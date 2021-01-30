@@ -1,9 +1,9 @@
 <template>
-    <div class="content">
+    <div class="content" v-if="movie">
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" >
         <div class="details">
             <div class="actions">
-                <button>Watch later</button>
+                <button v-on:click="addMovieInWatchlist(movie)">Watch later</button>
                 <button>Favorite</button>
                 <button>Assistido</button>
             </div>
@@ -44,6 +44,11 @@ export default {
     name: 'MovieDetails',
     props: [
         'movie'
-    ]
+    ],
+    methods: {
+        addMovieInWatchlist(movie) {
+            this.$emit('addInWatchlist', movie)
+        }
+    }
 }
 </script>
