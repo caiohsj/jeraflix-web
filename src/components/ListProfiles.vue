@@ -5,7 +5,7 @@
         </div>
         <div class="profiles" v-else>
             <div class="profile" v-for="profile in profiles" v-bind:key="profile.id">
-                <a>
+                <a v-on:click.prevent="setProfile(profile)">
                     <img src="../assets/logo.png" alt="">
                     <p>{{ profile.name }}</p>
                 </a>
@@ -88,6 +88,11 @@ export default {
     name: 'DialogForUserWithoutProfile',
     props: [
         'profiles'
-    ]
+    ],
+    methods: {
+        setProfile(profile) {
+            this.$emit('profileClicked', profile)
+        }
+    }
 }
 </script>

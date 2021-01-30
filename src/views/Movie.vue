@@ -38,7 +38,6 @@ export default {
         this.loadMovie()
     },
     beforeRouteEnter(to, from, next) {
-        console.log(from.name)
         next(vm => {
             vm.linkToReturn = from.name
         })

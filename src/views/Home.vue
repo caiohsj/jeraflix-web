@@ -1,6 +1,9 @@
 <template>
   <div class="home">
-    <ListProfiles v-bind:profiles="profiles"/>
+    <ListProfiles v-if="!profile" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
+    <div v-else>
+      
+    </div>
     <h1>Popular Movies</h1>
     <ListMovies v-bind:movies="moviesPopular"/>
     <h1>Top Rated Movies</h1>
@@ -31,7 +34,8 @@ export default {
       moviesTopRated: [],
       moviesUpcoming: [],
       moviesNowPlaying: [],
-      profiles: []
+      profiles: [],
+      profile: null
     }
   },
   components: {
@@ -60,6 +64,11 @@ export default {
         token: this.$store.getters.authUser.token
       }).then((response) => {
         this.profiles = response.data
+      })
+    },
+    setProfile(profile) {
+      this.$store.dispatch('addProfile', profile).then(() => {
+        this.profile = profile
       })
     }
   },
