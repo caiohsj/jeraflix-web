@@ -5,10 +5,10 @@
         </div>
         <div class="profiles" v-else>
             <div class="profile" v-for="profile in profiles" v-bind:key="profile.id">
-                <router-link :to="{ name: 'profile', params: { id: profile.id }}">
+                <a>
                     <img src="../assets/logo.png" alt="">
                     <p>{{ profile.name }}</p>
-                </router-link>
+                </a>
             </div>
         </div>
         <div class="box-btn">
@@ -50,6 +50,7 @@
 .profile a {
     text-decoration: none;
     color: #636e72;
+    cursor: pointer;
 }
 
 .profile img {

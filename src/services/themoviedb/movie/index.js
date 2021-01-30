@@ -1,19 +1,22 @@
 import {http, config} from '@/services/themoviedb/config'
 
 export default {
-    getPopular: () => {
+    getPopular() {
         return http.get(`/movie/popular?api_key=${config.apiKey}`)
     },
-    getTopRated: () => {
+    getTopRated() {
         return http.get(`/movie/top_rated?api_key=${config.apiKey}`)
     },
-    getUpComing: () => {
+    getUpComing() {
         return http.get(`/movie/upcoming?api_key=${config.apiKey}`)
     },
-    getNowPlaying: () => {
+    getNowPlaying() {
         return http.get(`/movie/now_playing?api_key=${config.apiKey}`)
     },
-    getLatest: () => {
+    getLatest() {
         return http.get(`/movie/latest?api_key=${config.apiKey}`)
+    },
+    get(id) {
+        return http.get(`/movie/${id}?api_key=${config.apiKey}`)
     }
 }
