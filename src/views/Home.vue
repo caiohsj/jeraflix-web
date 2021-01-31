@@ -2,13 +2,16 @@
   <div class="home">
     <ListProfiles v-if="!profile" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
     <div v-else>
-      <div v-if="!showLoading">
+      <div v-if="!showLoadingWatchlist">
         <h1 v-if="moviesWatchlist.length > 0">Watch Later</h1>
         <ListMovies v-bind:movies="moviesWatchlist"/>
       </div>
       <div class="loading" v-else>
         <img src="../assets/loading.gif" />
       </div>
+
+      <h1>Recommended for you</h1>
+      <ListMovies v-bind:movies="recommendedMovies"/>
     </div>
     <h1>Popular Movies</h1>
     <ListMovies v-bind:movies="moviesPopular"/>
@@ -46,9 +49,11 @@ export default {
       moviesUpcoming: [],
       moviesNowPlaying: [],
       moviesWatchlist: [],
+      watchedMovies: [],
+      recommendedMovies: [],
       profiles: [],
       profile: this.$store.getters.profile,
-      showLoading: true
+      showLoadingWatchlist: true
     }
   },
   components: {
@@ -82,8 +87,10 @@ export default {
     loadWatchlist() {
       if (this.profile) {
         profileService.getWatchlist(this.profile.id).then(response => {
-            this.moviesWatchlist = response.data.movies
-            this.showLoading = false
+          let recommendations = response.data.recommendations
+          this.moviesWatchlist = response.data.movies
+          this.showLoadingWatchlist = false
+          this.loadRecommendedMovies(recommendations)
         })
       }
     },
@@ -93,6 +100,22 @@ export default {
         this.loadWatchlist()
       })
     },
+    loadRecommendedMovies(recommendations) {
+      let movies = [];
+      recommendations.forEach(item => {
+        movies = movies.concat(item.results)
+      })
+      for(let i = 0; i < movies.length; i++){
+        let found = false;
+        for(let j = 0; j < this.recommendedMovies.length; j++){
+          if(movies[i].id == this.recommendedMovies[j].id) {
+            found = true;
+          }
+        }
+        if(!found)
+          this.recommendedMovies.push(movies[i])
+      }
+    }
   },
   mounted() {
     this.loadMoviesPopular(),
