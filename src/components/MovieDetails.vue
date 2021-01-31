@@ -5,7 +5,7 @@
             <div class="actions">
                 <button v-on:click="addMovieInWatchlist(movie)">Watch later</button>
                 <button>Favorite</button>
-                <button>Assistido</button>
+                <button v-on:click="addMovieInWatchedMoviesList(movie)">Assistido</button>
             </div>
             <h1>{{ movie.original_title }}</h1>
             <p>{{ movie.overview }}</p>
@@ -48,6 +48,9 @@ export default {
     methods: {
         addMovieInWatchlist(movie) {
             this.$emit('addInWatchlist', movie)
+        },
+        addMovieInWatchedMoviesList(movie) {
+            this.$emit('addInWatchedMoviesList', movie)
         }
     }
 }

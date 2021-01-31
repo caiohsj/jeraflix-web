@@ -3,7 +3,7 @@
         <BackLink v-bind:link="linkToReturn"/>
         <AlertMessageDanger v-bind:message="messageDanger"/>
         <AlertMessageSuccess v-bind:message="messageSuccess"/>
-        <MovieDetails v-on:addInWatchlist="addMovieInWatchlist" v-bind:movie="movie"/>
+        <MovieDetails v-on:addInWatchlist="addMovieInWatchlist" v-on:addInWatchedMoviesList="addMovieInWatchedMovies" v-bind:movie="movie"/>
     </div>
 </template>
 
@@ -16,6 +16,7 @@ import MovieDetails from '../components/MovieDetails.vue'
 import BackLink from '../components/BackLink.vue'
 import movieService from '../services/themoviedb/movie'
 import watchlistService from '../services/jeraflix_api/watchlist'
+import watchedMovieService from '../services/jeraflix_api/watched_movie'
 import AlertMessageDanger from '../components/AlertMessageDanger.vue'
 import AlertMessageSuccess from '../components/AlertMessageSuccess.vue'
 
@@ -48,6 +49,19 @@ export default {
                 watchlistService.add(profile, movie).then(response => {
                     if (response.data.status)
                         this.messageSuccess = 'Movie has been added.'
+                    else
+                        this.messageDanger = response.data.message
+                })
+            } else {
+                this.messageDanger = 'Select one profile!'
+            }
+        },
+        addMovieInWatchedMovies(movie) {
+            const profile = this.$store.getters.profile
+            if (profile) {
+                watchedMovieService.add(profile, movie).then(response => {
+                    if (response.data.status)
+                        this.messageSuccess = 'This movie was marked as watched.'
                     else
                         this.messageDanger = response.data.message
                 })
