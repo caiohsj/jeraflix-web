@@ -94,10 +94,20 @@ export default {
         })
       }
     },
+    loadWatchedMovies() {
+      if (this.profile) {
+        profileService.getWatchedMovies(this.profile.id).then(response => {
+          let recommendations = response.data.recommendations
+          this.watchedMovies = response.data.movies
+          this.loadRecommendedMovies(recommendations)
+        })
+      }
+    },
     setProfile(profile) {
       this.$store.dispatch('addProfile', profile).then(() => {
         this.profile = profile
         this.loadWatchlist()
+        this.loadWatchedMovies()
       })
     },
     loadRecommendedMovies(recommendations) {
@@ -122,7 +132,8 @@ export default {
     this.loadMoviesTopRated(),
     this.loadMoviesUpComing(),
     this.loadProfiles(),
-    this.loadWatchlist()
+    this.loadWatchlist(),
+    this.loadWatchedMovies()
   }
 }
 </script>

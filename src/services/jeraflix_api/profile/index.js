@@ -12,5 +12,8 @@ export default {
     },
     getWatchlist(id) {
         return http.get(`/profiles/${id}/watchlist`, { headers: headers })
+    },
+    getWatchedMovies(id) {
+        return http.get(`/profiles/${id}/watched_movies`, { headers: headers })
     }
 }
