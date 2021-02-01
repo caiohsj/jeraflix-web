@@ -3,9 +3,17 @@
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" >
         <div class="details">
             <div class="actions">
-                <button v-on:click="addMovieInWatchlist(movie)">Watch later <FontAwesomeIcon icon="clock" class="icon"/></button>
+                <button v-on:click="addMovieInWatchlist(movie)">
+                    Watch later
+                    <FontAwesomeIcon icon="clock" v-if="inWatchlist" class="checked"/>
+                    <FontAwesomeIcon icon="clock" v-else/>
+                </button>
                 <button>Favorite</button>
-                <button v-on:click="addMovieInWatchedMoviesList(movie)">Assistido <FontAwesomeIcon icon="check" class="icon"/></button>
+                <button v-on:click="addMovieInWatchedMoviesList(movie)">
+                    Assistido
+                    <FontAwesomeIcon icon="check" class="checked" v-if="inWatchedMovies"/>
+                    <FontAwesomeIcon icon="check" v-else/>
+                </button>
             </div>
             <h1>{{ movie.original_title }}</h1>
             <p>{{ movie.overview }}</p>
@@ -49,6 +57,10 @@ button {
     transition: all 0.3s;
 }
 
+.checked {
+    color: #0DB551;
+}
+
 button:hover {
     color: #ffffff;
 }
@@ -68,7 +80,9 @@ export default {
         FontAwesomeIcon
     },
     props: [
-        'movie'
+        'movie',
+        'inWatchlist',
+        'inWatchedMovies'
     ],
     methods: {
         addMovieInWatchlist(movie) {
