@@ -1,14 +1,18 @@
 <template>
     <div>
         <BackLink v-bind:link="linkToReturn"/>
-        <AlertMessageDanger v-bind:message="messageDanger"/>
-        <AlertMessageSuccess v-bind:message="messageSuccess"/>
+        <div class="messages" v-if="messageDanger != '' || messageSuccess != ''">
+            <AlertMessageDanger v-bind:message="messageDanger"/>
+            <AlertMessageSuccess v-bind:message="messageSuccess"/>
+        </div>
         <MovieDetails v-on:addInWatchlist="addMovieInWatchlist" v-on:addInWatchedMoviesList="addMovieInWatchedMovies" v-bind:movie="movie"/>
     </div>
 </template>
 
 <style scoped>
-
+.messages {
+    padding: 30px;
+}
 </style>
 
 <script>

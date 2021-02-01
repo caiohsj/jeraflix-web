@@ -3,9 +3,9 @@
         <img :src="`https://image.tmdb.org/t/p/w500${movie.poster_path}`" >
         <div class="details">
             <div class="actions">
-                <button v-on:click="addMovieInWatchlist(movie)">Watch later</button>
+                <button v-on:click="addMovieInWatchlist(movie)">Watch later <FontAwesomeIcon icon="clock" class="icon"/></button>
                 <button>Favorite</button>
-                <button v-on:click="addMovieInWatchedMoviesList(movie)">Assistido</button>
+                <button v-on:click="addMovieInWatchedMoviesList(movie)">Assistido <FontAwesomeIcon icon="check" class="icon"/></button>
             </div>
             <h1>{{ movie.original_title }}</h1>
             <p>{{ movie.overview }}</p>
@@ -37,11 +37,36 @@
 .actions {
     margin-bottom: 60px;
 }
+
+button {
+    border: none;
+    padding: 5px;
+    margin-right: 5px;
+    border-radius: 5%;
+    font-weight: 600;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+button:hover {
+    color: #ffffff;
+}
+
 </style>
 
 <script>
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { faClock, faCheck } from '@fortawesome/free-solid-svg-icons'
+
+library.add(faClock, faCheck)
+
 export default {
     name: 'MovieDetails',
+    components: {
+        FontAwesomeIcon
+    },
     props: [
         'movie'
     ],

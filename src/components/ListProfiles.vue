@@ -1,7 +1,7 @@
 <template>
     <div class="content">
         <div v-if="profiles.length == 0" class="dialog">
-            <h2 class="alert">You need create profile! click here</h2>
+            <h2 class="alert">Do you need create profile! click below.</h2>
         </div>
         <div class="profiles" v-else>
             <div class="profile" v-for="profile in profiles" v-bind:key="profile.id">

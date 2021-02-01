@@ -14,13 +14,14 @@
         <h1>Recommended for you</h1>
         <ListMovies v-bind:movies="recommendedMovies"/>
       </div>
+
+      <h1>Popular Movies</h1>
+      <ListMovies v-bind:movies="moviesPopular"/>
+      <h1>Top Rated Movies</h1>
+      <ListMovies v-bind:movies="moviesTopRated"/>
+      <h1>Top Upcoming</h1>
+      <ListMovies v-bind:movies="moviesUpcoming"/>
     </div>
-    <h1>Popular Movies</h1>
-    <ListMovies v-bind:movies="moviesPopular"/>
-    <h1>Top Rated Movies</h1>
-    <ListMovies v-bind:movies="moviesTopRated"/>
-    <h1>Top Upcoming</h1>
-    <ListMovies v-bind:movies="moviesUpcoming"/>
   </div>
 </template>
 
