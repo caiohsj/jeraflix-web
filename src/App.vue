@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Nav v-on:logout="logout"></Nav>
-    <router-view/>
+    <Nav v-on:logout="logout" v-bind:profile="profile"></Nav>
+    <router-view v-on:setProfileNav="getProfile"/>
   </div>
 </template>
 
@@ -12,11 +12,19 @@ export default {
   components: {
     Nav
   },
+  data() {
+    return {
+      profile: null
+    }
+  },
   methods: {
     logout() {
       this.$store.dispatch('logout').then(() => {
         this.$router.replace('/login')
       })
+    },
+    getProfile(profile) {
+      this.profile = profile
     }
   }
 }

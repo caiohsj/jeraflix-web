@@ -1,11 +1,13 @@
 <template>
     <div id="nav">
-        <img :src="logo" alt="" class="logo">
-        <p>flix</p>
+        <router-link to="/home" class="logo">
+          <img :src="logo" alt="" >
+        </router-link>
+        <div class="nav-profile" v-if="profile">
+          <img src="../assets/default-user-icon.jpg" alt="">
+          <h2 v-if="profile">{{ profile.name }}</h2>
+        </div>
         <ul>
-          <li v-if="auth == 'AUTHENTICATED'">
-            <router-link to="/home">Home</router-link>
-          </li>
           <li v-if="auth == 'AUTHENTICATED'">
             <a v-on:click.prevent="logout" to="/">Logout</a>
           </li>
@@ -22,6 +24,14 @@
   display: flex;
   justify-content: space-between;
   background: #040404;
+  height: 100px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#nav h2 {
+  color: #0DB551;
 }
 
 ul {
@@ -42,11 +52,25 @@ ul li {
 }
 
 #nav .logo {
-    width: 120px;
+  width: 120px;
+  display: flex;
 }
 
 #nav a.router-link-exact-active {
-  color:#00b894;
+  color:#0DB551;
+}
+
+.nav-profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-profile img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
 }
 </style>
 
@@ -64,6 +88,9 @@ export default {
       logout() {
         this.$emit('logout')
       }
-    }
+    },
+    props: [
+      'profile'
+    ],
 }
 </script>

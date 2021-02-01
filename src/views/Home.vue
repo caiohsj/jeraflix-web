@@ -10,8 +10,10 @@
         <img src="../assets/loading.gif" />
       </div>
 
-      <h1>Recommended for you</h1>
-      <ListMovies v-bind:movies="recommendedMovies"/>
+      <div v-if="recommendedMovies.length > 0">
+        <h1>Recommended for you</h1>
+        <ListMovies v-bind:movies="recommendedMovies"/>
+      </div>
     </div>
     <h1>Popular Movies</h1>
     <ListMovies v-bind:movies="moviesPopular"/>
@@ -108,6 +110,7 @@ export default {
         this.profile = profile
         this.loadWatchlist()
         this.loadWatchedMovies()
+        this.$emit('setProfileNav', profile)
       })
     },
     loadRecommendedMovies(recommendations) {

@@ -61,10 +61,6 @@ article {
     justify-content: flex-start;
 }
 
-article a {
-    z-index: 1;
-}
-
 article img {
     width: 200px;
     transition: all 0.4s;
