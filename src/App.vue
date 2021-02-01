@@ -20,7 +20,8 @@ export default {
   methods: {
     logout() {
       this.$store.dispatch('logout').then(() => {
-        this.$router.replace('/login')
+        this.profile = null
+        this.$router.push({name: 'login'})
       })
     },
     getProfile(profile) {
