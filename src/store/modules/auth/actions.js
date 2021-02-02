@@ -1,11 +1,13 @@
 import userService from '@/services/jeraflix_api/user'
 
 export default {
-    login(context, payload) {
-        userService.login(payload.email, payload.pass).then((response) => {
-            context.commit('setUser', response.data)
-            context.commit('setStatus', 'AUTHENTICATED')
-            sessionStorage.setItem('authUser', JSON.stringify(response.data))
+    async login(context, payload) {
+        await userService.login(payload.email, payload.pass).then((response) => {
+            if (response.data != '') {
+                context.commit('setUser', response.data)
+                context.commit('setStatus', 'AUTHENTICATED')
+                sessionStorage.setItem('authUser', JSON.stringify(response.data))
+            }
         })
     },
     logout(context) {

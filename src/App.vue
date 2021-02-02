@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Nav v-on:logout="logout" v-bind:profile="profile"></Nav>
+    <Nav v-on:logout="logout" v-bind:profile="profile" v-bind:auth="auth"></Nav>
     <router-view v-on:setProfileNav="getProfile"/>
   </div>
 </template>
@@ -14,13 +14,15 @@ export default {
   },
   data() {
     return {
-      profile: null
+      profile: null,
+      auth: this.$store.getters.status
     }
   },
   methods: {
     logout() {
       this.$store.dispatch('logout').then(() => {
         this.profile = null
+        this.auth = 'NO_AUTHENTICATED'
         this.$router.push({name: 'login'})
       })
     },

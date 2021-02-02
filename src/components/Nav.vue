@@ -80,7 +80,6 @@ export default {
     data() {
         return {
             logo: require('../assets/logo.svg'),
-            auth: this.$store.getters.status,
             authUser: this.$store.getters.authUser
         }
     },
@@ -90,7 +89,8 @@ export default {
       }
     },
     props: [
-      'profile'
+      'profile',
+      'auth'
     ],
 }
 </script>

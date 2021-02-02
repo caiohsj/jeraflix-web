@@ -1,5 +1,6 @@
 <template>
     <form @submit.prevent="">
+        <AlertMessageDanger v-bind:message="messageDanger"/>
         <input type="email" v-model="email" placeholder="Email" required>
         <input type="password" v-model="pass" placeholder="Password" required>
         <button v-on:click="login">Signin</button>
@@ -18,6 +19,7 @@
         height: 40px;
         border: none;
         border-bottom: 2px solid  rgb(13, 181, 81);
+        margin-top: 15px;
         margin-bottom: 15px;
         width: 100%;
         transition: all 0.4s;
@@ -55,8 +57,13 @@
 </style>
 
 <script>
+import AlertMessageDanger from '../components/AlertMessageDanger.vue'
+
 export default {
     name: 'LoginForm',
+    components: {
+        AlertMessageDanger
+    },
     data() {
         return {
             email: '',
@@ -70,6 +77,9 @@ export default {
                 pass: this.pass
             })
         }
-    }
+    },
+    props: [
+        'messageDanger'
+    ]
 }
 </script>
