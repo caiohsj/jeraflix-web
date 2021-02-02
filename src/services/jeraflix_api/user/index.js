@@ -7,7 +7,7 @@ export default {
     login(email, pass) {
         const user = {
             email: email,
-            password: pass
+            password: btoa(pass)
         }
         return http.post('/auth', user)
     }
