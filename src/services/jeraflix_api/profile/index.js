@@ -15,5 +15,8 @@ export default {
     },
     getWatchedMovies(id) {
         return http.get(`/profiles/${id}/watched_movies`, { headers: headers })
+    },
+    getRecommendations(id) {
+        return http.get(`/profiles/${id}/recommendations`, { headers: headers })
     }
 }

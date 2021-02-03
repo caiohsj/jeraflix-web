@@ -14,6 +14,9 @@
         <h1>Recommended for you</h1>
         <ListMovies v-bind:movies="recommendedMovies"/>
       </div>
+      <div class="loading" v-if="showLoadingRecommendations">
+        <img src="../assets/loading.gif" />
+      </div>
 
       <h1>Popular Movies</h1>
       <ListMovies v-bind:movies="moviesPopular"/>
@@ -56,7 +59,8 @@ export default {
       recommendedMovies: [],
       profiles: [],
       profile: this.$store.getters.profile,
-      showLoadingWatchlist: true
+      showLoadingWatchlist: true,
+      showLoadingRecommendations: true
     }
   },
   components: {
@@ -90,19 +94,8 @@ export default {
     loadWatchlist() {
       if (this.profile) {
         profileService.getWatchlist(this.profile.id).then(response => {
-          let recommendations = response.data.recommendations
           this.moviesWatchlist = response.data.movies
           this.showLoadingWatchlist = false
-          this.loadRecommendedMovies(recommendations)
-        })
-      }
-    },
-    loadWatchedMovies() {
-      if (this.profile) {
-        profileService.getWatchedMovies(this.profile.id).then(response => {
-          let recommendations = response.data.recommendations
-          this.watchedMovies = response.data.movies
-          this.loadRecommendedMovies(recommendations)
         })
       }
     },
@@ -110,24 +103,16 @@ export default {
       this.$store.dispatch('addProfile', profile).then(() => {
         this.profile = profile
         this.loadWatchlist()
-        this.loadWatchedMovies()
+        this.loadRecommendedMovies()
         this.$emit('setProfileNav', profile)
       })
     },
-    loadRecommendedMovies(recommendations) {
-      let movies = [];
-      recommendations.forEach(item => {
-        movies = movies.concat(item.results)
-      })
-      for(let i = 0; i < movies.length; i++){
-        let found = false;
-        for(let j = 0; j < this.recommendedMovies.length; j++){
-          if(movies[i].id == this.recommendedMovies[j].id) {
-            found = true;
-          }
-        }
-        if(!found)
-          this.recommendedMovies.push(movies[i])
+    loadRecommendedMovies() {
+      if (this.profile) {
+        profileService.getRecommendations(this.profile.id).then((response) => {
+          this.recommendedMovies = response.data
+          this.showLoadingRecommendations = false
+        })
       }
     }
   },
@@ -137,7 +122,7 @@ export default {
     this.loadMoviesUpComing(),
     this.loadProfiles(),
     this.loadWatchlist(),
-    this.loadWatchedMovies()
+    this.loadRecommendedMovies()
   }
 }
 </script>
