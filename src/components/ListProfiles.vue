@@ -6,7 +6,7 @@
         <div class="profiles" v-else>
             <div class="profile" v-for="profile in profiles" v-bind:key="profile.id">
                 <a v-on:click.prevent="setProfile(profile)">
-                    <img src="../assets/logo.png" alt="">
+                    <img src="../assets/default-user-icon.jpg" alt="">
                     <p>{{ profile.name }}</p>
                 </a>
             </div>
@@ -30,11 +30,14 @@
 
 .profiles {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     padding: 30px 5px;
 }
 
 .profile {
+    display: flex;
+    justify-content: center;
     border: 1px solid #d1d1d1;
     padding: 5px;
 }
@@ -83,7 +86,8 @@
 
 @media screen and (max-width: 768px) {
     .profile {
-        width: 300px;
+        margin: 3px;
+        flex-basis: calc(50% - 6px);
     }
 }
 </style>
