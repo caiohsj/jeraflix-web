@@ -81,6 +81,11 @@
     box-shadow: 0px 0px 6px 1px  #55efc4;
 }
 
+@media screen and (max-width: 768px) {
+    .profile {
+        width: 300px;
+    }
+}
 </style>
 
 <script>
