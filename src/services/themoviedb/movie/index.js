@@ -18,5 +18,8 @@ export default {
     },
     get(id) {
         return http.get(`/movie/${id}?api_key=${config.apiKey}`)
+    },
+    search(query) {
+        return http.get(`/search/movie?query=${query}&api_key=${config.apiKey}`)
     }
 }

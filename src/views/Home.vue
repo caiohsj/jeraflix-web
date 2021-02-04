@@ -2,6 +2,8 @@
   <div class="home">
     <ListProfiles v-if="!profile" v-on:profileClicked="setProfile" v-bind:profiles="profiles"/>
     <div v-else>
+      <FormSearchMovie/>
+
       <div v-if="!showLoadingWatchlist">
         <h1 v-if="moviesWatchlist.length > 0">Watch Later</h1>
         <ListMovies v-bind:movies="moviesWatchlist"/>
@@ -41,7 +43,8 @@ h1 {
 
 <script>
 import ListMovies from '@/components/ListMovies.vue'
-import ListProfiles from '@/components/ListProfiles'
+import ListProfiles from '@/components/ListProfiles.vue'
+import FormSearchMovie from '@/components/FormSearchMovie.vue'
 
 import movieService from '../services/themoviedb/movie'
 import profileService from '../services/jeraflix_api/profile'
@@ -65,7 +68,8 @@ export default {
   },
   components: {
     ListMovies,
-    ListProfiles
+    ListProfiles,
+    FormSearchMovie
   },
   methods: {
     loadMoviesPopular() {

@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import ProfileCreate from '../views/ProfileCreate.vue'
 import Movie from '../views/Movie'
+import SearchMovie from '../views/SearchMovie.vue'
 import store from '../store'
 
 Vue.use(VueRouter)
@@ -37,6 +38,14 @@ const routes = [
     path: '/movie/:id',
     name: 'movie',
     component: Movie,
+    meta: {
+      authRequired: true
+    }
+  },
+  {
+    path: '/movie/search',
+    name: 'movie.search',
+    component: SearchMovie,
     meta: {
       authRequired: true
     }
