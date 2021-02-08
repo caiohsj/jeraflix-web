@@ -47,7 +47,6 @@ export default {
             const id = this.$route.params.id
             let profile = this.$store.getters.profile
             movieService.get(profile,id).then(response => {
-                console.log(response.data.movie_in_watchlist)
                 this.movie = response.data.movie
                 this.movieInWatchlist = response.data.movie_in_watchlist
                 this.movieInWatchedMovies = response.data.movie_in_watched_movies

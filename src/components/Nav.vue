@@ -138,7 +138,6 @@ export default {
     methods: {
       logout() {
         this.$emit('logout')
-        this.toggleMenuMobile()
       },
       toggleMenuMobile() {
         let elMenu = document.querySelector('.mobile-menu')

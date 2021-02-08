@@ -4,5 +4,8 @@ export default {
     },
     status(state) {
         return state.status
+    },
+    profiles(state) {
+        return state.profiles
     }
 }

@@ -29,10 +29,12 @@ export default {
     methods: {
         async signin(user) {
             await this.$store.dispatch('login', user)
-            if(this.$store.getters.status === 'AUTHENTICATED')
-                this.$router.go(0)
-            else
+            if(this.$store.getters.status === 'AUTHENTICATED') {
+                this.$router.push({name: 'home'})
+                this.$emit('authenticated')
+            } else {
                 this.messageDanger = 'Email or password incorrect'
+            }
         }
     }
 }

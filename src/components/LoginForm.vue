@@ -71,7 +71,8 @@ export default {
         }
     },
     methods: {
-        login() {
+        login(e) {
+            e.target.innerHTML = "Loading.."
             this.$emit('login', {
                 email: this.email,
                 pass: this.pass

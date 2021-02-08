@@ -8,7 +8,8 @@ export default {
     state() {
         return {
             authUser: {},
-            status: NO_AUTHENTICATED
+            status: NO_AUTHENTICATED,
+            profiles: []
         }
     },
     mutations,

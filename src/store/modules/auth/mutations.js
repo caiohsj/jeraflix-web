@@ -4,5 +4,8 @@ export default {
     },
     setStatus(state, status) {
         state.status = status
+    },
+    setProfiles(state, profiles) {
+        state.profiles = profiles
     }
 }
